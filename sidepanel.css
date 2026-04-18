@@ -1,6 +1,8 @@
+
+
 :root {
-  --primary: #8b5cf6;
-  --primary-hover: #7c3aed;
+  --primary: #f97316;
+  --primary-hover: #ea580c;
   --bg-dark: #0f172a;
   --bg-card: rgba(30, 41, 59, 0.7);
   --text-main: #f8fafc;
@@ -38,9 +40,7 @@ body {
 .header h1 {
   font-size: 1.5rem;
   font-weight: 700;
-  background: linear-gradient(to right, #a78bfa, #f472b6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--primary);
   margin: 0;
 }
 
@@ -156,7 +156,7 @@ body {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary), #d946ef);
+  background: var(--primary);
   color: white;
   border: none;
   border-radius: 12px;
@@ -166,7 +166,7 @@ body {
   transition: transform 0.1s, opacity 0.2s;
   width: 100%;
   margin-top: 8px;
-  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
 }
 
 .btn-primary:hover {
@@ -208,7 +208,7 @@ body {
 .spinner {
   width: 32px;
   height: 32px;
-  border: 3px solid rgba(139, 92, 246, 0.2);
+  border: 3px solid rgba(249, 115, 22, 0.2);
   border-radius: 50%;
   border-top-color: var(--primary);
   animation: spin 1s linear infinite;

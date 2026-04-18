@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react"
 import { Storage } from "@plasmohq/storage"
 import { GoogleGenerativeAI } from "@google/generative-ai"
-import "./style.css"
+import "./sidepanel.css"
 
 const storage = new Storage()
 
 export default function SidePanel() {
   const [apiKey, setApiKey] = useState("")
+  const [modelName, setModelName] = useState("gemini-1.5-flash")
   const [clothes, setClothes] = useState<string[]>([])
   const [modelType, setModelType] = useState("female")
   const [ageGroup, setAgeGroup] = useState("adult")
@@ -19,12 +20,21 @@ export default function SidePanel() {
     storage.get("gemini_api_key").then((val) => {
       if (val) setApiKey(val)
     })
+    storage.get("gemini_model_name").then((val) => {
+      if (val) setModelName(val)
+    })
   }, [])
 
   const handleApiKeyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value
     setApiKey(val)
     storage.set("gemini_api_key", val)
+  }
+
+  const handleModelNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value
+    setModelName(val)
+    storage.set("gemini_model_name", val)
   }
 
   const handleDrop = async (e: React.DragEvent) => {
@@ -69,8 +79,8 @@ export default function SidePanel() {
 
     try {
       const genAI = new GoogleGenerativeAI(apiKey)
-      // We use Gemini 1.5 Flash to analyze the clothes first
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" })
+      // Use the user-defined model name
+      const model = genAI.getGenerativeModel({ model: modelName })
 
       // Convert images to generative parts
       const imageParts = await Promise.all(
@@ -159,6 +169,15 @@ export default function SidePanel() {
             placeholder="Gemini API Key"
             value={apiKey}
             onChange={handleApiKeyChange}
+          />
+        </div>
+        <div className="input-group">
+          <input
+            type="text"
+            className="input-field"
+            placeholder="Gemini Model (e.g. gemini-1.5-flash)"
+            value={modelName}
+            onChange={handleModelNameChange}
           />
         </div>
       </section>

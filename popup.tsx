@@ -1,4 +1,4 @@
-import "./style.css"
+import "./sidepanel.css"
 
 function IndexPopup() {
   return (
